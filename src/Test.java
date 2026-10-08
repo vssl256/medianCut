@@ -36,7 +36,7 @@ public class Test {
         }
         sortBy("b");
         for ( Pixel pixel : selected ) {
-            IO.println( pixel.r + " " + pixel.g + " " + pixel.b );
+            IO.println( pixel.R + " " + pixel.G + " " + pixel.B);
         }
     }
 

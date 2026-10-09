@@ -33,9 +33,9 @@ void main() {
     long endTime = System.nanoTime() - startTime;
     System.out.println( endTime / 1_000_000 + " ms" );
 
-    Pixel p1 = new Pixel( 255, 255, 255 );
+    Pixel p1 = new Pixel( 0, 0, 255 );
     Pixel p2 = new Pixel( 254, 255, 255 );
-    IO.println(colorDistanceLab( p1, p2 ));
+    IO.println(p1.L + " " + p1.a + " " + p1.b);
 }
 
 private static void getOpenComputersPalette() {

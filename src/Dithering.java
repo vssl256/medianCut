@@ -1,6 +1,5 @@
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class Dithering {
 
-    static final String INPUT = "i.png";
+    static final String INPUT = "cub.jpg";
     static final String OUTPUT = "dither.png";
     static final List<Pixel> GB_PALETTE = new ArrayList<>();
     static final List<Pixel> BW_PALETTE = new ArrayList<>();
@@ -22,12 +21,13 @@ public class Dithering {
         initPalette();
         BufferedImage image = readImage( INPUT );
 
-        image = bayer( image );
+        bayer(image);
 
         writeImage( OUTPUT, image );
+        IO.println();
     }
 
-    private static BufferedImage bayer( BufferedImage image ) {
+    private static void bayer( BufferedImage image ) {
         WritableRaster raster = image.getRaster();
         for ( int y = 0; y < raster.getHeight(); y++ ) {
             for ( int x = 0; x < raster.getWidth(); x++ ) {
@@ -40,7 +40,6 @@ public class Dithering {
                 raster.setPixel( x, y, new int[] { color.R, color.G, color.B } );
             }
         }
-        return image;
     }
 
     private static Pixel getColor(int y, int x, Pixel pixel, float[][] matrix, List<Pixel> palette ) {
@@ -68,6 +67,7 @@ public class Dithering {
         BW_PALETTE.add( new Pixel( 0, 0, 0 ) );
         //BW_PALETTE.add( new Pixel( 85, 85, 85 ) );
         //BW_PALETTE.add( new Pixel( 170, 170, 170 ) );
+        BW_PALETTE.add( new Pixel( 96, 96, 96 ) );
         BW_PALETTE.add( new Pixel( 255, 255, 255 ) );
 
     }
